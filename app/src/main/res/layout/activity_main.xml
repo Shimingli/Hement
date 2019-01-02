@@ -47,20 +47,5 @@
             android:id="@+id/btn_fragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <Button
-            android:text="Timer的Log依赖使用的实例"
-            android:id="@+id/btn_log"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <Button
-            android:text="新的RxBus的使用实例"
-            android:id="@+id/btn_new_rxbus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <Button
-            android:text="新的网络框架的使用实例"
-            android:id="@+id/btn_new_net_work"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
     </LinearLayout>
 </ScrollView>

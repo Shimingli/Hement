@@ -1,8 +1,5 @@
 package com.shiming.hement.ui.base;
 
-import android.content.Context;
-import android.view.inputmethod.InputMethodManager;
-
 import com.shiming.base.ui.QMUIFragmentActivity;
 
 /**
@@ -16,14 +13,4 @@ import com.shiming.base.ui.QMUIFragmentActivity;
  */
 
 public abstract class BaseFragmentActivity  extends QMUIFragmentActivity {
-
-    /**
-     * 隐藏键盘
-     */
-    public void hideKeyboard() {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (getCurrentFocus() != null) {
-            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-        }
-    }
 }

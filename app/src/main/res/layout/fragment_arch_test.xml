@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="0dp"
-        android:background="#995544"
+        android:background="#889911"
         android:fitsSystemWindows="true">
         <Space
             android:id="@+id/anchor"

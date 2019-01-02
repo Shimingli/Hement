@@ -1,8 +1,5 @@
 package com.shiming.hement.utils;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
@@ -17,12 +14,11 @@ import io.reactivex.subjects.PublishSubject;
  * @version v1.0
  * @since 2018/12/4 18:48
  */
-@Singleton
+
 public class RxEventBus {
     private final BackpressureStrategy mBackpressureStrategy = BackpressureStrategy.BUFFER;
     private final PublishSubject<Object> mBusSubject;
 
-    @Inject
     public RxEventBus() {
         mBusSubject = PublishSubject.create();
     }

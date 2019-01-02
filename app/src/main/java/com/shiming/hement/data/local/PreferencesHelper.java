@@ -6,10 +6,6 @@ import android.content.Context;
 import com.shiming.base.login.PreferenceFileNames;
 import com.shiming.base.login.PreferenceKeys;
 import com.shiming.base.utils.PreferenceUtil;
-import com.shiming.hement.injection.ApplicationContext;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 
 /**
@@ -22,18 +18,8 @@ import javax.inject.Singleton;
  * @version v1.0
  * @since 2018/11/29 10:35
  */
-@Singleton
-public class PreferencesHelper {
-    /**
-     * 但是需要注意的是这种方式的依赖类一定要有一个没有参数的构造函数，不然会编译的时候就会报如下错误，
-     * 这个也可以理解因为Dagger2 在生成代码的时候没有办法给构造函数传递参数。
-     * This type supports members injection but cannot be implicitly provided.
-     * @param context
-     */
-    @Inject
-    public  PreferencesHelper(@ApplicationContext Context context) {
 
-    }
+public class PreferencesHelper {
 
     public void saveValue(PreferenceFileNames fileNames, PreferenceKeys key, Object value) {
         PreferenceUtil.saveValue(fileNames, key, value);

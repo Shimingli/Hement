@@ -12,16 +12,11 @@ import android.widget.Toast;
 
 import com.jakewharton.rxbinding2.view.RxView;
 import com.shiming.hement.R;
-import com.shiming.hement.ui.MainActivity;
 import com.shiming.hement.ui.base.BaseActivity;
 import com.tbruyelle.rxpermissions2.Permission;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.io.IOException;
-import java.util.Timer;
-
-import javax.inject.Inject;
-
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
@@ -46,13 +41,10 @@ public class RxPermissionsActivity extends BaseActivity implements View.OnClickL
     private RxPermissions mRxPermissions;
     private Button mNeedMorePermission;
 
-    //    @Inject
-//    RxPermissions mRxPermissions;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rx_permissions);
-        activityComponent().inject(this);
         surfaceView = findViewById(R.id.surfaceView);
         mNeedMorePermission = findViewById(R.id.btn_need_more_permission);
         mRxPermissions = new RxPermissions(this);
@@ -60,7 +52,7 @@ public class RxPermissionsActivity extends BaseActivity implements View.OnClickL
         mNeedMorePermission.setOnClickListener(this);
         //使用RxView的简单的例子
         disposable = RxView.clicks(findViewById(R.id.enableCamera))
-                // 单击按钮时请求权限
+                // Ask for permissions when button is clicked
                 .compose(mRxPermissions.ensureEach(Manifest.permission.CAMERA))
                 .subscribe(new Consumer<Permission>() {
                                @Override

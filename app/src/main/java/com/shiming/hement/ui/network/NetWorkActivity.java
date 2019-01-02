@@ -20,9 +20,6 @@ import com.shiming.hement.data.DataManager;
 import com.shiming.hement.data.model.TodayBean;
 
 import java.util.ArrayList;
-
-import javax.inject.Inject;
-
 import timber.log.Timber;
 
 
@@ -39,7 +36,7 @@ import timber.log.Timber;
 public class NetWorkActivity extends BaseActivity implements NetWorkView, View.OnClickListener {
 
     String key="b15674dbd34ec00ded57b369dfdabd90";
-    @Inject
+
     NetWorkPresenter mMainPresenter;
 
     private Button mBtn;
@@ -50,8 +47,8 @@ public class NetWorkActivity extends BaseActivity implements NetWorkView, View.O
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityComponent().inject(this);
         setContentView(R.layout.activity_net_work);
+        mMainPresenter=new NetWorkPresenter(this);
         Timber.tag(getClassName()).i("mMainPresenter   =%s",mMainPresenter);
         mMainPresenter.attachView(this);
         initView();

@@ -1,8 +1,9 @@
 package com.shiming.hement.ui.network;
 
+import android.content.Context;
+
 import com.shiming.hement.data.DataManager;
 import com.shiming.hement.data.model.TodayBean;
-import com.shiming.hement.injection.ConfigPersistent;
 import com.shiming.network.BasePresenter;
 import com.shiming.network.retrofit.BaseObserver;
 import com.shiming.network.retrofit.SMResponse;
@@ -10,7 +11,6 @@ import com.shiming.network.retrofit.SubscriberListener;
 
 import java.util.ArrayList;
 
-import javax.inject.Inject;
 
 import io.reactivex.disposables.Disposable;
 
@@ -23,16 +23,16 @@ import io.reactivex.disposables.Disposable;
  * @version v1.0
  * @since 2018/11/28 17:26
  */
-@ConfigPersistent
+
 public class NetWorkPresenter  extends BasePresenter<NetWorkView> {
 
     private final DataManager mDataManager;
 
     private Disposable mDisposable;
 
-    @Inject
-    public NetWorkPresenter(DataManager dataManager) {
-        mDataManager = dataManager;
+
+    public NetWorkPresenter(Context context) {
+        mDataManager = new DataManager(context);
     }
 
     @Override

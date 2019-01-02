@@ -14,7 +14,6 @@ import com.shiming.hement.utils.RxEventBus;
 
 import java.util.concurrent.TimeUnit;
 
-import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -33,19 +32,17 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class RxEventBusActivity extends BaseActivity implements View.OnClickListener {
-    @Inject
+
     RxEventBus mRxEventBus;
 
     private final CompositeDisposable disposables = new CompositeDisposable();
     private TextView mRxDes;
     private Button mRxBtn;
     int count=1;
-    @SuppressLint("RxSubscribeOnError")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rx_event_demo);
-        activityComponent().inject(this);
         mRxDes = findViewById(R.id.tv_rx_des);
 
         disposables.add(mRxEventBus.toObservable().subscribeOn(Schedulers.io())
@@ -69,7 +66,7 @@ public class RxEventBusActivity extends BaseActivity implements View.OnClickList
     /**
      * 模拟页面可见了，发送一个事件
      */
-    @SuppressLint({"CheckResult", "RxLeakedSubscription", "RxSubscribeOnError", "RxDefaultScheduler"})
+    @SuppressLint("CheckResult")
     @Override
     protected void onResume() {
         super.onResume();

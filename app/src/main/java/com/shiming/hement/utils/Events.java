@@ -11,11 +11,8 @@ package com.shiming.hement.utils;
  */
 
 public class Events {
+    private Events() {
 
-    private final String mMsg;
-
-    public Events(String msg) {
-        mMsg = msg;
     }
 
     public static class TapEvent {
@@ -24,10 +21,5 @@ public class Events {
 
     public static class AutoEvent {
 
-    }
-
-    @Override
-    public String toString() {
-        return "Events="+mMsg;
     }
 }

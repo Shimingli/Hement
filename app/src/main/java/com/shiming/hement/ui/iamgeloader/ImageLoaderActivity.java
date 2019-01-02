@@ -23,7 +23,6 @@ public class ImageLoaderActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityComponent().inject(this);
         setContentView(R.layout.activity_image_loader);
         findViewById(R.id.btn_click_me).setOnClickListener(new View.OnClickListener() {
             @Override

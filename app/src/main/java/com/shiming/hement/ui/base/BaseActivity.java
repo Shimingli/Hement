@@ -1,22 +1,11 @@
 package com.shiming.hement.ui.base;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleRegistry;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.util.LongSparseArray;
-import android.view.inputmethod.InputMethodManager;
 
 import com.shiming.base.ui.QMUIActivity;
 import com.shiming.base.utils.QMUIDisplayHelper;
 import com.shiming.base.utils.QMUIStatusBarHelper;
-import com.shiming.hement.HementApplication;
-import com.shiming.hement.injection.component.ActivityComponent;
-import com.shiming.hement.injection.component.ConfigPersistentComponent;
-import com.shiming.hement.injection.component.DaggerConfigPersistentComponent;
-import com.shiming.hement.injection.module.ActivityModule;
-import com.shiming.hement.lifecycle.SyncLifecycleObserver;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -26,7 +15,7 @@ import static com.shiming.base.BaseApplication.getContext;
 
 /**
  * <p>
- * 抽象应用程序中的其他活动必须实现的活动。它处理Dagger组件的创建，并确保ConfigPersistentComponent的实例跨配置更改存活。
+ *  抽象应用程序中的其他活动必须实现的活动。它处理Dagger组件的创建，并确保ConfigPersistentComponent的实例跨配置更改存活。
  * </p>
  *
  * @author shiming
@@ -46,25 +35,10 @@ public class BaseActivity extends QMUIActivity {
      * 相对于AtomicLong，LongAdder有着更高的性能和更好的表现，可以完全替代AtomicLong的来进行原子操作
      * 但是对 java的版本有要求，这里就不使用 LongAdder了
      */
-    // private static final LongAdder NEXT_ID = new LongAdder();
+   // private static final LongAdder NEXT_ID = new LongAdder();
 
-    /**
-     * LongSparseArray是android里为<Long,Object> 这样的Hashmap而专门写的类,目的是提高效率，其核心是折半查找函数（binarySearch）。
-     * SparseArray仅仅提高内存效率，而不是提高执行效率
-     * ，所以也决定它只适用于android系统（内存对android项目有多重要）SparseArray不需要开辟内存空间来额外存储外部映射，从而节省内存。
-     */
-    // https://www.jianshu.com/p/a5f638bafd3b   常用集合的原理分析 Dagger does not support injection into private fields
-    private static final LongSparseArray<ConfigPersistentComponent> sComponentsMap = new LongSparseArray<>();
 
     private long mActivityId;
-
-    private ActivityComponent mActivityComponent;
-   // 以前需要这样做，现在不需要了
-//    private LifecycleRegistry registry = new LifecycleRegistry(this);
-    //    @Override
-//    public Lifecycle getLifecycle() {
-//        return registry;
-//    }
 
 
     @Override
@@ -73,27 +47,13 @@ public class BaseActivity extends QMUIActivity {
         //创建ActivityComponent，如果配置更改后调用缓存的ConfigPersistentComponent，则重用它。
         mActivityId = savedInstanceState != null ? savedInstanceState.getLong(KEY_ACTIVITY_ID) : NEXT_ID.getAndIncrement();
 
-        ConfigPersistentComponent configPersistentComponent = sComponentsMap.get(mActivityId, null);
-        if (null == configPersistentComponent) {
-            Timber.tag(getClassName()).i("创建新的configPersistentComponent id=%d", mActivityId);
-            configPersistentComponent = DaggerConfigPersistentComponent.builder()
-                    .applicationComponent(HementApplication.get(this).getComponent())
-                    .build();
-            sComponentsMap.put(mActivityId, configPersistentComponent);
-        }
-        mActivityComponent = configPersistentComponent.activityComponent(new ActivityModule(this));
 
         //状态栏的颜色
         QMUIStatusBarHelper.setStatusBarLightMode(this);
-
-
     }
-
-
-    protected String getClassName() {
+    protected String getClassName(){
         return this.getClass().getSimpleName();
     }
-
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -109,29 +69,15 @@ public class BaseActivity extends QMUIActivity {
     protected void onDestroy() {
         //检查此活动是否处于销毁过程中，以便用新配置重新创建。
         if (!isChangingConfigurations()) {
-            Timber.tag(getClassName()).i("销毁的configPersistentComponent id=%d", mActivityId);
-            sComponentsMap.remove(mActivityId);
+            Timber.tag(getClassName()).i("销毁的configPersistentComponent id=%d",mActivityId);
         }
         super.onDestroy();
     }
 
-    public ActivityComponent activityComponent() {
-        return mActivityComponent;
-    }
 
     @Override
     protected int backViewInitOffset() {
         return QMUIDisplayHelper.dp2px(getContext(), 100);
     }
 
-
-    /**
-     * 隐藏键盘
-     */
-    public void hideKeyboard() {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (getCurrentFocus() != null) {
-            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-        }
-    }
 }

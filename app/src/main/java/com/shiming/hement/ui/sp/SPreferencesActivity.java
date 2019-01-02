@@ -1,5 +1,6 @@
 package com.shiming.hement.ui.sp;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -10,8 +11,6 @@ import com.shiming.base.login.PreferenceKeys;
 import com.shiming.hement.R;
 import com.shiming.hement.data.DataManager;
 import com.shiming.hement.ui.base.BaseActivity;
-
-import javax.inject.Inject;
 
 import timber.log.Timber;
 
@@ -27,7 +26,6 @@ import timber.log.Timber;
 
 public class SPreferencesActivity extends BaseActivity {
 
-    @Inject
     DataManager mDataManager;
 
     private TextView mTextView;
@@ -38,10 +36,9 @@ public class SPreferencesActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sp);
-        activityComponent().inject(this);
+        mDataManager=new DataManager(this);
         //对于Timber %s是针对字符的，%d是针对数字的
         Timber.tag(getClassName()).i("mDataManager   =%s"+mDataManager);
-
         mTextView = findViewById(R.id.tv_sp_des);
         String string = mDataManager.getPreferencesHelper().getString(PreferenceFileNames.TEXT, PreferenceKeys.TEXT);
         mTextView.setText(string);

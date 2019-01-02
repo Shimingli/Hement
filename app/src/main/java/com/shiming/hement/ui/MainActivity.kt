@@ -9,12 +9,10 @@ import com.shiming.hement.ui.db.DBNetWorkDemoActivity
 import com.shiming.hement.ui.fragmentdemo.FragmentDemoActivity
 import com.shiming.hement.ui.iamgeloader.ImageLoaderActivity
 import com.shiming.hement.ui.network.NetWorkActivity
-import com.shiming.hement.ui.life_cycle_demo.NewRxBusDemoActivity
-import com.shiming.hement.ui.network.NewNetWorkActivity
 import com.shiming.hement.ui.permission.RxPermissionsActivity
 import com.shiming.hement.ui.rxbusdemo.RxEventBusActivity
 import com.shiming.hement.ui.sp.SPreferencesActivity
-import com.shiming.hement.ui.timber.TimberDemoActivity
+
 
 
 public class MainActivity : BaseActivity() {
@@ -27,7 +25,6 @@ public class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activityComponent().inject(this)
         setContentView(R.layout.activity_main)
 //        var msg = mDataManager!!.preferencesHelper!!.getString(PreferenceFileNames.TEXT, PreferenceKeys.TEXT)
 //        Timber.tag(className).i("mPreferencesHelper=%s", msg)
@@ -52,18 +49,6 @@ public class MainActivity : BaseActivity() {
 
         findViewById<View>(R.id.btn_fragment).setOnClickListener {
             startActivity(Intent(this, FragmentDemoActivity::class.java))
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_still)
-        }
-        findViewById<View>(R.id.btn_log).setOnClickListener {
-            startActivity(Intent(this, TimberDemoActivity::class.java))
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_still)
-        }
-        findViewById<View>(R.id.btn_new_rxbus).setOnClickListener {
-            startActivity(Intent(this, NewRxBusDemoActivity::class.java))
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_still)
-        }
-        findViewById<View>(R.id.btn_new_net_work).setOnClickListener {
-            startActivity(Intent(this, NewNetWorkActivity::class.java))
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_still)
         }
     }

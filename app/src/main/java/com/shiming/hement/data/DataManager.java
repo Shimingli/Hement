@@ -1,5 +1,7 @@
 package com.shiming.hement.data;
 
+import android.content.Context;
+
 import com.shiming.hement.data.local.DatabaseHelper;
 import com.shiming.hement.data.local.PreferencesHelper;
 import com.shiming.hement.data.model.TodayBean;
@@ -10,8 +12,6 @@ import com.shiming.network.retrofit.SMResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -29,7 +29,7 @@ import io.reactivex.schedulers.Schedulers;
  * @version v1.0
  * @since 2018/11/29 09:33
  */
-@Singleton
+
 public class DataManager {
 
 
@@ -37,11 +37,11 @@ public class DataManager {
     private final PreferencesHelper mPreferencesHelper;
     private final DatabaseHelper mDatabaseHelper;
 
-    @Inject
-    public DataManager(IRemoteServer server, PreferencesHelper preferencesHelper, DatabaseHelper databaseHelper) {
-        mIRemoteServer = server;
-        mPreferencesHelper = preferencesHelper;
-        mDatabaseHelper = databaseHelper;
+
+    public DataManager(Context context) {
+        mIRemoteServer = IRemoteServer.Creator.newHementService();
+        mPreferencesHelper = new PreferencesHelper();
+        mDatabaseHelper = new DatabaseHelper(context);
     }
 
     public void loadData(String key, String day, BaseObserver observer) {

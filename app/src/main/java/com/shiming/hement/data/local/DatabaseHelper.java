@@ -1,5 +1,6 @@
 package com.shiming.hement.data.local;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -10,8 +11,6 @@ import com.squareup.sqlbrite2.SqlBrite;
 
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -23,33 +22,36 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * <p>
- * 保存数据库中的数据，这个数据的来源是网络请求
+ *
  * </p>
  *
  * @author shiming
  * @version v1.0
  * @since 2018/11/29 10:58
  */
-@Singleton
+
 public class DatabaseHelper {
 
     private final BriteDatabase mDb;
 
-    @Inject
-    public DatabaseHelper(DbOpenHelper dbOpenHelper) {
-        this(dbOpenHelper, Schedulers.io());
+    /**
+     * 这样子就没有很好的解耦，在方法里面 new 一个对象 ！
+     * @param context
+     */
+    public DatabaseHelper(Context context) {
+        this(new DbOpenHelper(context), Schedulers.io());
     }
 
     public DatabaseHelper(DbOpenHelper dbOpenHelper, Scheduler scheduler) {
         SqlBrite.Builder briteBuilder = new SqlBrite.Builder();
         mDb = briteBuilder.build().wrapDatabaseHelper(dbOpenHelper, scheduler);
     }
-    public BriteDatabase getDb() {
+    public  BriteDatabase getDb() {
         return mDb;
     }
 
     /**
-     * 保存数据库中的数据，这个数据的来源是网络请求
+     * 保存数据库中的数据
      * @param newRibots
      * @return
      */

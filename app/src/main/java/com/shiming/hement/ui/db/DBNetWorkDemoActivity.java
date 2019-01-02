@@ -12,9 +12,6 @@ import com.shiming.hement.data.model.TodayBean;
 import com.shiming.hement.ui.base.BaseActivity;
 
 import java.util.List;
-
-import javax.inject.Inject;
-
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -33,7 +30,7 @@ import timber.log.Timber;
 
 public class DBNetWorkDemoActivity extends BaseActivity {
 
-    @Inject
+
     DataManager mDataManager;
 
     private TextView mShowDBText;
@@ -42,8 +39,8 @@ public class DBNetWorkDemoActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_db_demo);
-        activityComponent().inject(this);
         mShowDBText = findViewById(R.id.tv_dp_des);
+        mDataManager=new DataManager(this);
         mDataManager.syncDBBean().subscribeOn(Schedulers.io()).subscribe(new Observer<TodayBean>() {
             @Override
             public void onSubscribe(Disposable d) {
