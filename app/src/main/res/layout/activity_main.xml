@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:text="网络Demo"
+            android:id="@+id/btn_net_work"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:text="本地sp存储使用实例"
+            android:id="@+id/btn_sp_demo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:text="本地db存储使用实例"
+            android:id="@+id/btn_db_demo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:text="RxEventBus使用实例"
+            android:id="@+id/btn_rx_bus_demo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:text="RxPermission使用实例"
+            android:id="@+id/btn_rx_permission"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:text="图片框架使用实例"
+            android:id="@+id/btn_imageloader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:text="fragment使用的实例"
+            android:id="@+id/btn_fragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:text="Timer的Log依赖使用的实例"
+            android:id="@+id/btn_log"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:text="新的RxBus的使用实例"
+            android:id="@+id/btn_new_rxbus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:text="新的网络框架的使用实例"
+            android:id="@+id/btn_new_net_work"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</ScrollView>

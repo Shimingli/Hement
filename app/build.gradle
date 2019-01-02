@@ -1,0 +1,56 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.shiming.hement"
+        minSdkVersion 15
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        // timber 的配置  debuggable
+        release {
+            minifyEnabled false
+            debuggable  false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
+        }
+    }
+}
+
+dependencies {
+    // rxpermissions 
+    implementation "com.github.tbruyelle:rxpermissions:0.10.2"
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.1'
+    //dagger2
+    api "com.google.dagger:dagger:2.15"
+    compileOnly 'org.glassfish:javax.annotation:10.0-b28' //必须需要的 对于 dagger
+    annotationProcessor "com.google.dagger:dagger-compiler:2.15"
+    testAnnotationProcessor "com.google.dagger:dagger-compiler:2.15"
+    androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:2.15"
+
+//    implementation project(':network')
+    api project(':network')
+    api project(':imageloader')
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+//    api ("com.squareup.sqlbrite2:sqlbrite:3.2.0") {
+//        exclude group: 'com.android.support', module: 'support-annotations'
+//    }
+
+
+    api  "com.jakewharton.rxrelay2:rxrelay:2.0.0"
+
+}
+repositories {
+    mavenCentral()
+}

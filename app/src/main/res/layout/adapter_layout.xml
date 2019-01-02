@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <TextView
+        android:textSize="16sp"
+        android:textColor="#000"
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <android.support.v4.widget.Space
+        android:background="#f00"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <android.support.v4.widget.Space
+        android:background="#f00"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+  <TextView
+      android:textSize="16sp"
+      android:textColor="#000"
+      android:id="@+id/tv_des"
+      android:text="2006年4月4日 (农历三月初七)，泰国总理他信辞职。"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"/>
+
+    <TextView
+        android:textSize="16sp"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/tv_data_"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <android.support.v4.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+</LinearLayout>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.shiming.hement">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 往SDCard写入数据权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+
+    <application
+        android:name=".HementApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".ui.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.network.NetWorkActivity"/>
+        <activity android:name=".ui.sp.SPreferencesActivity"/>
+        <activity android:name=".ui.db.DBNetWorkDemoActivity"/>
+        <activity android:name=".ui.rxbusdemo.RxEventBusActivity"/>
+        <activity android:name=".ui.permission.RxPermissionsActivity"/>
+        <activity android:name=".ui.iamgeloader.DemoActivity"/>
+        <activity android:name=".ui.iamgeloader.ImageLoaderActivity"/>
+        <activity android:name=".ui.iamgeloader.TransitionOptionsActivity"/>
+        <activity android:name=".ui.iamgeloader.ImageProgressActivity"/>
+        <activity android:name=".ui.fragmentdemo.FragmentDemoActivity"/>
+        <activity android:name=".ui.timber.TimberDemoActivity"/>
+        <activity android:name=".ui.life_cycle_demo.NewRxBusDemoActivity"/>
+        <activity android:name=".ui.network.NewNetWorkActivity"/>
+    </application>
+
+</manifest>

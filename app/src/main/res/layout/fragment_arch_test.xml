@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.shiming.base.widget.QMUIWindowInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="0dp"
+        android:background="#995544"
+        android:fitsSystemWindows="true">
+        <Space
+            android:id="@+id/anchor"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true" />
+        <TextView
+            android:id="@+id/title"
+            android:text="111"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/anchor"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/colorAccent"
+            android:textSize="32sp" />
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/anchor"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="10dp"
+            android:text="圆角为高度的一半" />
+        <Button
+            android:id="@+id/btn_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="10dp"
+            android:text="退出当前的，并且重新开启Activity" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:fitsSystemWindows="true"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <ImageView
+            android:id="@+id/back"
+            android:src="@mipmap/ic_nav_back"
+            android:layout_centerVertical="true"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+        <TextView
+            android:id="@+id/text"
+            android:textSize="20sp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+</com.shiming.base.widget.QMUIWindowInsetLayout>
