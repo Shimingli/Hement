@@ -49,10 +49,13 @@ dependencies {
 
 
     api  "com.jakewharton.rxrelay2:rxrelay:2.0.0"
-    //logger 
+    //logger
     api 'com.orhanobut:logger:2.2.0'
     //微信的xlog
     api 'com.elvishew:xlog:1.6.1'
+    //美团的Logan
+    api 'com.dianping.android.sdk:logan:1.1.0'
+
 
 }
 repositories {

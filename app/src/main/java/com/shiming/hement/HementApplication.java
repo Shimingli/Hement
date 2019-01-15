@@ -5,6 +5,8 @@ import android.os.Environment;
 import android.util.Log;
 
 
+import com.dianping.logan.Logan;
+import com.dianping.logan.LoganConfig;
 import com.elvishew.xlog.LogLevel;
 import com.elvishew.xlog.XLog;
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -57,8 +59,8 @@ public class HementApplication extends BaseApplication {
             Timber.plant(new DebugTree(){
                 @Override
                 protected void log(int priority, String tag, @NotNull String message, Throwable t) {
-                    //super.log(priority, tag, message, t);
-                    Logger.log(priority, tag, message, t);
+                    super.log(priority, tag, message, t);
+                    //Logger.log(priority, tag, message, t);
                 }
             });
         } else {
@@ -75,6 +77,16 @@ public class HementApplication extends BaseApplication {
         Logger.addLogAdapter(new AndroidLogAdapter());
         //或者如果你想要在正式版中禁止打日志
         XLog.init(BuildConfig.DEBUG ? LogLevel.ALL : LogLevel.NONE);
+
+
+        LoganConfig config = new LoganConfig.Builder()
+                .setCachePath(getApplicationContext().getFilesDir().getAbsolutePath())
+                .setPath(getApplicationContext().getExternalFilesDir(null).getAbsolutePath()
+                        + File.separator + "hement_logo")
+                .setEncryptKey16("0123456789012345".getBytes())
+                .setEncryptIV16("0123456789012345".getBytes())
+                .build();
+        Logan.init(config);
     }
 
     public static HementApplication get(Context context) {
