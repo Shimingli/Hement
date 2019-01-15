@@ -40,6 +40,9 @@
         <activity android:name=".ui.life_cycle_demo.NewRxBusDemoActivity"/>
         <activity android:name=".ui.network.NewNetWorkActivity"/>
         <activity android:name=".ui.log.LogDemoActivity"/>
+        <activity android:name=".ui.log.XLogWeChatActivity"/>
+        <activity android:name=".ui.log.LoganActivity"/>
+        <activity android:name=".ui.log.LoggerActivity"/>
     </application>
 
 </manifest>
