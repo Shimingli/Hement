@@ -65,13 +65,16 @@ public class MainActivity : BaseActivity() {
             startActivity(Intent(this, NewNetWorkActivity::class.java))
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_still)
         }
-        Logger.d("MainActivity")
+        //Logger.d("MainActivity")
         // 新的log的Demo
         findViewById<View>(R.id.btn_new_log).setOnClickListener {
             startActivity(Intent(this, LogDemoActivity::class.java))
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_still)
         }
-    }
 
+        val scale = getResources().getDisplayMetrics().density
+        //我手机上的 density3.0
+        Logger.d("我手机上的 density" +scale)
+    }
 
 }
