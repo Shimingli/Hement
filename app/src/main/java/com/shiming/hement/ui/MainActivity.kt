@@ -3,6 +3,7 @@ package com.shiming.hement.ui
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import com.orhanobut.logger.Logger
 import com.shiming.hement.R
 import com.shiming.hement.ui.base.BaseActivity
 import com.shiming.hement.ui.db.DBNetWorkDemoActivity
@@ -10,6 +11,7 @@ import com.shiming.hement.ui.fragmentdemo.FragmentDemoActivity
 import com.shiming.hement.ui.iamgeloader.ImageLoaderActivity
 import com.shiming.hement.ui.network.NetWorkActivity
 import com.shiming.hement.ui.life_cycle_demo.NewRxBusDemoActivity
+import com.shiming.hement.ui.log.LogDemoActivity
 import com.shiming.hement.ui.network.NewNetWorkActivity
 import com.shiming.hement.ui.permission.RxPermissionsActivity
 import com.shiming.hement.ui.rxbusdemo.RxEventBusActivity
@@ -24,13 +26,10 @@ public class MainActivity : BaseActivity() {
      */
 //    @field:Named
 //     var mDataManager: DataManager? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activityComponent().inject(this)
         setContentView(R.layout.activity_main)
-//        var msg = mDataManager!!.preferencesHelper!!.getString(PreferenceFileNames.TEXT, PreferenceKeys.TEXT)
-//        Timber.tag(className).i("mPreferencesHelper=%s", msg)
         findViewById<View>(R.id.btn_net_work).setOnClickListener {
             startActivity(Intent(this, NetWorkActivity::class.java))
         }
@@ -64,6 +63,12 @@ public class MainActivity : BaseActivity() {
         }
         findViewById<View>(R.id.btn_new_net_work).setOnClickListener {
             startActivity(Intent(this, NewNetWorkActivity::class.java))
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_still)
+        }
+        Logger.d("MainActivity")
+        // 新的log的Demo
+        findViewById<View>(R.id.btn_new_log).setOnClickListener {
+            startActivity(Intent(this, LogDemoActivity::class.java))
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_still)
         }
     }

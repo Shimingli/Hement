@@ -39,6 +39,7 @@
         <activity android:name=".ui.timber.TimberDemoActivity"/>
         <activity android:name=".ui.life_cycle_demo.NewRxBusDemoActivity"/>
         <activity android:name=".ui.network.NewNetWorkActivity"/>
+        <activity android:name=".ui.log.LogDemoActivity"/>
     </application>
 
 </manifest>

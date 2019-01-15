@@ -1,9 +1,15 @@
 package com.shiming.hement;
 
 import android.content.Context;
+import android.os.Environment;
 import android.util.Log;
 
 
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.CsvFormatStrategy;
+import com.orhanobut.logger.DiskLogAdapter;
+import com.orhanobut.logger.DiskLogStrategy;
+import com.orhanobut.logger.Logger;
 import com.shiming.base.BaseApplication;
 import com.shiming.base.BuildConfig;
 
@@ -17,6 +23,9 @@ import com.shiming.hement.utils.Events;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.io.File;
+import java.io.IOException;
 
 import timber.log.Timber;
 
@@ -42,12 +51,17 @@ public class HementApplication extends BaseApplication {
     public void onCreate() {
         super.onCreate();
         if (BuildConfig.DEBUG) {
-            //也可以设置log一直开
-            Timber.plant(new DebugTree());
+            //也可以设置log一直开  todo  logger 也可以和Timber完美的融合
+            Timber.plant(new DebugTree(){
+                @Override
+                protected void log(int priority, String tag, @NotNull String message, Throwable t) {
+                    //super.log(priority, tag, message, t);
+                    Logger.log(priority, tag, message, t);
+                }
+            });
         } else {
             //上线的话  就关闭有些不必要的日记输出
             Timber.plant(new CrashReportingTree());
-
         }
         QMUISwipeBackActivityManager.init(this);
         //打印tag为类名
@@ -55,6 +69,8 @@ public class HementApplication extends BaseApplication {
         // TODO: 2018/12/19  这个事件是不会输出的   
         Events events = new Events("我是HementApplication中发出，但是我接受不到");
         SyncRxBus.getInstance().post(SyncResponseEventType.SUCCESS, events);
+
+        Logger.addLogAdapter(new AndroidLogAdapter());
     }
 
     public static HementApplication get(Context context) {
@@ -80,7 +96,7 @@ public class HementApplication extends BaseApplication {
     }
 
     /**
-     * A tree which logs important information for crash reporting.
+     * 记录重要信息以进行故障报告的树。
      */
     private static final class CrashReportingTree extends Timber.Tree {
 
