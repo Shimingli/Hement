@@ -5,6 +5,8 @@ import android.os.Environment;
 import android.util.Log;
 
 
+import com.elvishew.xlog.LogLevel;
+import com.elvishew.xlog.XLog;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.CsvFormatStrategy;
 import com.orhanobut.logger.DiskLogAdapter;
@@ -71,6 +73,8 @@ public class HementApplication extends BaseApplication {
         SyncRxBus.getInstance().post(SyncResponseEventType.SUCCESS, events);
 
         Logger.addLogAdapter(new AndroidLogAdapter());
+        //或者如果你想要在正式版中禁止打日志
+        XLog.init(BuildConfig.DEBUG ? LogLevel.ALL : LogLevel.NONE);
     }
 
     public static HementApplication get(Context context) {
