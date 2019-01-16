@@ -4,30 +4,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
-        android:background="@color/colorPrimary"
+        android:textColor="@color/colorPrimary"
         android:id="@+id/tv_logger"
         android:layout_marginTop="80dp"
         android:layout_gravity="center_horizontal"
         android:textSize="@dimen/sp_24"
-        android:text="logger_Demo"
+        android:text="logger_使用"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
-        android:background="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
         android:id="@+id/tv_xlog"
         android:layout_marginTop="80dp"
         android:layout_gravity="center_horizontal"
         android:textSize="@dimen/sp_24"
-        android:text="Xlog_Demo"
+        android:text="微信的Xlog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
-        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/colorPrimary"
         android:id="@+id/tv_logan"
         android:layout_marginTop="80dp"
         android:textSize="@dimen/sp_24"
         android:layout_gravity="center_horizontal"
-        android:text="Logan_Demo"
+        android:text="美团的Logan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </LinearLayout>

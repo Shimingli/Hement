@@ -83,8 +83,8 @@ public class HementApplication extends BaseApplication {
                 .setCachePath(getApplicationContext().getFilesDir().getAbsolutePath())
                 .setPath(getApplicationContext().getExternalFilesDir(null).getAbsolutePath()
                         + File.separator + "hement_logo")
-                .setEncryptKey16("0123456789012345".getBytes())
-                .setEncryptIV16("0123456789012345".getBytes())
+                .setEncryptKey16("0123456789012345".getBytes()) //128位ase加密Key
+                .setEncryptIV16("0123456789012345".getBytes()) //128位aes加密IV
                 .build();
         Logan.init(config);
     }
