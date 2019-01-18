@@ -19,7 +19,7 @@ import io.reactivex.Observable;
 public class ExtendSyncRxBus {
 
     private static ExtendSyncRxBus instance;
-    private  PublishRelay<Object> relay;
+    private  PublishRelay<ExtendEvents> relay;
 
     public static synchronized ExtendSyncRxBus getInstance() {
         if (instance == null) {
@@ -35,11 +35,11 @@ public class ExtendSyncRxBus {
     private ExtendSyncRxBus() {
         relay = PublishRelay.create();
     }
-    public void post(Object event) {
+    public void post(ExtendEvents event) {
         relay.accept(event);
     }
 
-    public Observable<Object>  toObservable() {
+    public Observable<ExtendEvents> toObservable() {
         return relay;
     }
 }

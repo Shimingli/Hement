@@ -38,6 +38,12 @@ dependencies {
     testAnnotationProcessor "com.google.dagger:dagger-compiler:2.15"
     androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:2.15"
 
+    // Dagger Android
+    annotationProcessor "com.google.dagger:dagger-android-processor:2.15"
+    implementation "com.google.dagger:dagger-android-support:2.15"
+    // 如果您不使用支持库，请改为包含它
+    implementation "com.google.dagger:dagger-android:2.15"
+
 //    implementation project(':network')
     api project(':network')
     api project(':imageloader')
@@ -55,6 +61,15 @@ dependencies {
     api 'com.elvishew:xlog:1.6.1'
     //美团的Logan
     api 'com.dianping.android.sdk:logan:1.1.0'
+
+
+    api 'com.trello.rxlifecycle3:rxlifecycle:3.0.0'
+
+// If you want to bind to Android-specific lifecycles
+    api 'com.trello.rxlifecycle3:rxlifecycle-android:3.0.0'
+
+// If you want pre-written Activities and Fragments you can subclass as providers
+    api 'com.trello.rxlifecycle3:rxlifecycle-components:3.0.0'
 
 
 }

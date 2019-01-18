@@ -8,6 +8,9 @@ import com.shiming.hement.lifecycle.SyncResponse;
 import com.shiming.hement.lifecycle.SyncResponseEventType;
 import com.shiming.hement.lifecycle.SyncRxBus;
 import com.shiming.hement.utils.Events;
+import com.trello.rxlifecycle3.RxLifecycle;
+import com.trello.rxlifecycle3.android.ActivityEvent;
+import com.trello.rxlifecycle3.android.FragmentEvent;
 
 import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -67,6 +70,9 @@ public class HandleEventObserver implements LifecycleObserver {
     protected void handlerEvents(ExtendEvents extendEvents) {
 
     }
+    /*
+    如果 在实际上我们 需要在任务中做耗时操作的时候
+     */
 //    private void handlerEvents(ExtendEvents extendEvents){
 //        Timber.tag(TAG).d("received sync comment success event for comment %s", extendEvents);
 //        disposables.add(Completable.fromAction(new Action() {
@@ -101,7 +107,7 @@ public class HandleEventObserver implements LifecycleObserver {
 
 
 
-//    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     public void onPause() {
         Timber.tag(TAG).d("onPause lifecycle event.");
         // 如果不在这里

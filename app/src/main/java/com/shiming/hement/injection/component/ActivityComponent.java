@@ -48,4 +48,6 @@ public interface ActivityComponent {
     void inject(RxPermissionsActivity rxPermissionsActivity);
 
     void inject(ImageLoaderActivity imageLoaderActivity);
+
+    void inject(MainActivity mainActivity);
 }

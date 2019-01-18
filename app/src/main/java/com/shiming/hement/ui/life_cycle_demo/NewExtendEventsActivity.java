@@ -12,7 +12,13 @@ import com.shiming.hement.lifecycle.SyncResponseEventType;
 import com.shiming.hement.lifecycle.SyncRxBus;
 import com.shiming.hement.ui.base.BaseActivity;
 import com.shiming.hement.utils.Events;
+import com.trello.rxlifecycle3.RxLifecycle;
+import com.trello.rxlifecycle3.android.ActivityEvent;
+import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 /**
@@ -29,6 +35,7 @@ public class NewExtendEventsActivity extends BaseActivity   {
 
     private TextView mDes;
 
+    @SuppressLint("CheckResult")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,15 +55,28 @@ public class NewExtendEventsActivity extends BaseActivity   {
             }
         });
         mDes = findViewById(R.id.tv_s_des);
-        getLifecycle().addObserver(new HandleEventObserver(){
-            @SuppressLint("SetTextI18n")
-            @Override
-            protected void handlerEvents(ExtendEvents extendEvents){
-                int code = extendEvents.getCode();
-                mDes.setText(code+(String)extendEvents.getContent());
-                Timber.tag(getClassName()).w((String)extendEvents.getContent());
-            }
-        });
+
+        ExtendSyncRxBus.getInstance().toObservable()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(this.<ExtendEvents>bindUntilEvent(ActivityEvent.DESTROY))
+                .subscribe(new Consumer<ExtendEvents>() {
+                    @Override
+                    public void accept(ExtendEvents extendEvents) throws Exception {
+                        handlerEvents(extendEvents);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+
+                    }
+                });
+
     }
 
+    public void handlerEvents(ExtendEvents extendEvents) {
+        int code = extendEvents.getCode();
+        mDes.setText(code+(String)extendEvents.getContent());
+        Timber.tag(getClassName()).w((String)extendEvents.getContent());
+    }
 }
