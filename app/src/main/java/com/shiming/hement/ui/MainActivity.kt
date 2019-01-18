@@ -1,14 +1,19 @@
 package com.shiming.hement.ui
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import com.orhanobut.logger.Logger
 import com.shiming.hement.R
 import com.shiming.hement.ui.base.BaseActivity
 import com.shiming.hement.ui.db.DBNetWorkDemoActivity
 import com.shiming.hement.ui.fragmentdemo.FragmentDemoActivity
 import com.shiming.hement.ui.iamgeloader.ImageLoaderActivity
+import com.shiming.hement.ui.life_cycle_demo.ExtendEvents
+import com.shiming.hement.ui.life_cycle_demo.HandleEventObserver
+import com.shiming.hement.ui.life_cycle_demo.NewExtendEventsActivity
 import com.shiming.hement.ui.network.NetWorkActivity
 import com.shiming.hement.ui.life_cycle_demo.NewRxBusDemoActivity
 import com.shiming.hement.ui.log.LogDemoActivity
@@ -17,6 +22,7 @@ import com.shiming.hement.ui.permission.RxPermissionsActivity
 import com.shiming.hement.ui.rxbusdemo.RxEventBusActivity
 import com.shiming.hement.ui.sp.SPreferencesActivity
 import com.shiming.hement.ui.timber.TimberDemoActivity
+import timber.log.Timber
 
 
 public class MainActivity : BaseActivity() {
@@ -57,6 +63,7 @@ public class MainActivity : BaseActivity() {
             startActivity(Intent(this, TimberDemoActivity::class.java))
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_still)
         }
+        //新的RxBus的使用实例
         findViewById<View>(R.id.btn_new_rxbus).setOnClickListener {
             startActivity(Intent(this, NewRxBusDemoActivity::class.java))
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_still)
@@ -72,9 +79,29 @@ public class MainActivity : BaseActivity() {
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_still)
         }
 
+        findViewById<View>(R.id.btn_new_extend_events).setOnClickListener {
+            startActivity(Intent(this, NewExtendEventsActivity::class.java))
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_still)
+        }
+
         val scale = getResources().getDisplayMetrics().density
         //我手机上的 density3.0
         Logger.d("我手机上的 density" +scale)
+
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val textView = findViewById<TextView>(R.id.tv_msg_events)
+        lifecycle.addObserver(object : HandleEventObserver() {
+            @SuppressLint("SetTextI18n")
+            override fun handlerEvents(extendEvents: ExtendEvents<*>) {
+                val code = extendEvents.code
+                textView.setText(code.toString() + extendEvents.content as String)
+                Timber.tag(className).w(extendEvents.content as String)
+            }
+        })
     }
 
 }

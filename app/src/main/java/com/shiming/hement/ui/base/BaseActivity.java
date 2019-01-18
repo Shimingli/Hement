@@ -1,7 +1,6 @@
 package com.shiming.hement.ui.base;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleRegistry;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,7 +15,6 @@ import com.shiming.hement.injection.component.ActivityComponent;
 import com.shiming.hement.injection.component.ConfigPersistentComponent;
 import com.shiming.hement.injection.component.DaggerConfigPersistentComponent;
 import com.shiming.hement.injection.module.ActivityModule;
-import com.shiming.hement.lifecycle.SyncLifecycleObserver;
 
 import java.util.concurrent.atomic.AtomicLong;
 

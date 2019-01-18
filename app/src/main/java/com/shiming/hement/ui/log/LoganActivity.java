@@ -148,9 +148,10 @@ public class LoganActivity extends BaseActivity {
                 reader = new BufferedReader(new FileReader(logFile));
                 String tempString = null;
                 int line = 1;
-//一次读一行，读入null时文件结束
+                 //一次读一行，读入null时文件结束
                 while ((tempString = reader.readLine()) != null) {
-//把当前行号显示出来
+                    System.out.println("以行为单位读取文件内容，一次读一行  "+tempString);
+                //把当前行号显示出来
                     String s = AndroidAESEncryptor.decrypt128("0123456789012345", tempString, "");
                     System.out.println("line " + line + ": " + tempString);
                     Logger.d(s);
@@ -160,7 +161,7 @@ public class LoganActivity extends BaseActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (Exception e) {
-
+                e.printStackTrace();
             } finally {
                 if (reader != null) {
                     try {
@@ -170,9 +171,6 @@ public class LoganActivity extends BaseActivity {
                     }
                 }
             }
-
-
-
 
         }
 

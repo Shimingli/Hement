@@ -77,8 +77,6 @@ public class HementApplication extends BaseApplication {
         Logger.addLogAdapter(new AndroidLogAdapter());
         //或者如果你想要在正式版中禁止打日志
         XLog.init(BuildConfig.DEBUG ? LogLevel.ALL : LogLevel.NONE);
-
-
         LoganConfig config = new LoganConfig.Builder()
                 .setCachePath(getApplicationContext().getFilesDir().getAbsolutePath())
                 .setPath(getApplicationContext().getExternalFilesDir(null).getAbsolutePath()

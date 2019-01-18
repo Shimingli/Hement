@@ -43,6 +43,7 @@
         <activity android:name=".ui.log.XLogWeChatActivity"/>
         <activity android:name=".ui.log.LoganActivity"/>
         <activity android:name=".ui.log.LoggerActivity"/>
+        <activity android:name=".ui.life_cycle_demo.NewExtendEventsActivity"/>
     </application>
 
 </manifest>
