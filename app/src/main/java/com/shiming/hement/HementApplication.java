@@ -84,6 +84,10 @@ public class HementApplication extends BaseApplication {
         Logan.init(config);
     }
 
+
+
+
+
     public static HementApplication get(Context context) {
         return (HementApplication) context.getApplicationContext();
     }
@@ -96,7 +100,6 @@ public class HementApplication extends BaseApplication {
         }
         return mApplicationComponent;
     }
-
     /**
      * 需要用特定测试组件替换组件
      *
@@ -129,7 +132,6 @@ public class HementApplication extends BaseApplication {
                     FakeCrashLibrary.logWarning(t);
                 }
             }
-
         }
     }
 }

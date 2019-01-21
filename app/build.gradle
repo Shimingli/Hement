@@ -64,7 +64,7 @@ dependencies {
 
 
 
-
+     //就是那个生命周期的问题 还是不要用 为好
 //    api 'com.trello.rxlifecycle3:rxlifecycle:3.0.0'
 //
 //// If you want to bind to Android-specific lifecycles

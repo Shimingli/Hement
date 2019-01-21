@@ -43,7 +43,7 @@ public class MainActivity extends BaseActivity {
 
     private TextView mDes;
 
-    @SuppressLint("CheckResult")
+    @SuppressLint({"CheckResult", "RxLeakedSubscription"})
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

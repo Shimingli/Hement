@@ -24,7 +24,7 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * <p>
- *
+ *  就是一个简单的事件的传递  感觉没有什么了不起的啊
  * </p>
  *
  * @author shiming

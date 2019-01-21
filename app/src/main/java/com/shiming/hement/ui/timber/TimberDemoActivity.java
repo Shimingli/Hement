@@ -93,8 +93,6 @@ import static java.lang.String.format;
                 Toast.makeText(TimberDemoActivity.this, "查看日志信息", LENGTH_SHORT).show();
             }
         });
-
-
     }
     private String getString() {
         return "TimberDemoActivity foo";
