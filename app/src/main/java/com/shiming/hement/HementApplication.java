@@ -10,9 +10,6 @@ import com.dianping.logan.LoganConfig;
 import com.elvishew.xlog.LogLevel;
 import com.elvishew.xlog.XLog;
 import com.orhanobut.logger.AndroidLogAdapter;
-import com.orhanobut.logger.CsvFormatStrategy;
-import com.orhanobut.logger.DiskLogAdapter;
-import com.orhanobut.logger.DiskLogStrategy;
 import com.orhanobut.logger.Logger;
 import com.shiming.base.BaseApplication;
 import com.shiming.base.BuildConfig;
@@ -29,7 +26,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.io.IOException;
 
 import timber.log.Timber;
 
@@ -54,6 +50,7 @@ public class HementApplication extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+
         if (BuildConfig.DEBUG) {
             //也可以设置log一直开  todo  logger 也可以和Timber完美的融合
             Timber.plant(new DebugTree(){

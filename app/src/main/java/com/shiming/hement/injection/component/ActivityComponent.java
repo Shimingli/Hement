@@ -49,5 +49,4 @@ public interface ActivityComponent {
 
     void inject(ImageLoaderActivity imageLoaderActivity);
 
-    void inject(MainActivity mainActivity);
 }

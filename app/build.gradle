@@ -63,13 +63,15 @@ dependencies {
     api 'com.dianping.android.sdk:logan:1.1.0'
 
 
-    api 'com.trello.rxlifecycle3:rxlifecycle:3.0.0'
 
-// If you want to bind to Android-specific lifecycles
-    api 'com.trello.rxlifecycle3:rxlifecycle-android:3.0.0'
 
-// If you want pre-written Activities and Fragments you can subclass as providers
-    api 'com.trello.rxlifecycle3:rxlifecycle-components:3.0.0'
+//    api 'com.trello.rxlifecycle3:rxlifecycle:3.0.0'
+//
+//// If you want to bind to Android-specific lifecycles
+//    api 'com.trello.rxlifecycle3:rxlifecycle-android:3.0.0'
+//
+//// If you want pre-written Activities and Fragments you can subclass as providers
+//    api 'com.trello.rxlifecycle3:rxlifecycle-components:3.0.0'
 
 
 }

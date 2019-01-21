@@ -8,14 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.shiming.hement.R;
-import com.shiming.hement.lifecycle.SyncResponseEventType;
-import com.shiming.hement.lifecycle.SyncRxBus;
 import com.shiming.hement.ui.base.BaseActivity;
-import com.shiming.hement.utils.Events;
-import com.trello.rxlifecycle3.RxLifecycle;
-import com.trello.rxlifecycle3.android.ActivityEvent;
-import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
@@ -35,7 +28,7 @@ public class NewExtendEventsActivity extends BaseActivity   {
 
     private TextView mDes;
 
-    @SuppressLint("CheckResult")
+    @SuppressLint({"CheckResult", "RxLeakedSubscription"})
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +52,7 @@ public class NewExtendEventsActivity extends BaseActivity   {
         ExtendSyncRxBus.getInstance().toObservable()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .compose(this.<ExtendEvents>bindUntilEvent(ActivityEvent.DESTROY))
+//                .compose(this.<ExtendEvents>bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new Consumer<ExtendEvents>() {
                     @Override
                     public void accept(ExtendEvents extendEvents) throws Exception {

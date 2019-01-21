@@ -24,7 +24,6 @@ import com.shiming.hement.ui.permission.RxPermissionsActivity;
 import com.shiming.hement.ui.rxbusdemo.RxEventBusActivity;
 import com.shiming.hement.ui.sp.SPreferencesActivity;
 import com.shiming.hement.ui.timber.TimberDemoActivity;
-import com.trello.rxlifecycle3.android.ActivityEvent;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
@@ -143,7 +142,7 @@ public class MainActivity extends BaseActivity {
         ExtendSyncRxBus.getInstance().toObservable()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .compose(this.<ExtendEvents>bindUntilEvent(ActivityEvent.DESTROY))
+//                .compose(this.<ExtendEvents>bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new Consumer<ExtendEvents>() {
                     @Override
                     public void accept(ExtendEvents extendEvents) throws Exception {

@@ -4,13 +4,7 @@ import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.OnLifecycleEvent;
 
-import com.shiming.hement.lifecycle.SyncResponse;
-import com.shiming.hement.lifecycle.SyncResponseEventType;
-import com.shiming.hement.lifecycle.SyncRxBus;
-import com.shiming.hement.utils.Events;
-import com.trello.rxlifecycle3.RxLifecycle;
-import com.trello.rxlifecycle3.android.ActivityEvent;
-import com.trello.rxlifecycle3.android.FragmentEvent;
+
 
 import io.reactivex.Completable;
 import io.reactivex.android.schedulers.AndroidSchedulers;

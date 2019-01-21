@@ -16,19 +16,9 @@ import com.shiming.hement.injection.component.ConfigPersistentComponent;
 import com.shiming.hement.injection.component.DaggerConfigPersistentComponent;
 import com.shiming.hement.injection.module.ActivityModule;
 import com.shiming.hement.ui.life_cycle_demo.ExtendEvents;
-import com.trello.rxlifecycle3.LifecycleProvider;
-import com.trello.rxlifecycle3.LifecycleTransformer;
-import com.trello.rxlifecycle3.RxLifecycle;
-import com.trello.rxlifecycle3.android.ActivityEvent;
-import com.trello.rxlifecycle3.android.RxLifecycleAndroid;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-import androidx.annotation.CallSuper;
-import androidx.annotation.CheckResult;
-import androidx.annotation.NonNull;
-import io.reactivex.Observable;
-import io.reactivex.subjects.BehaviorSubject;
 import timber.log.Timber;
 
 import static com.shiming.base.BaseApplication.getContext;
@@ -43,7 +33,7 @@ import static com.shiming.base.BaseApplication.getContext;
  * @since 2018/11/28 10:04
  */
 
-public class BaseActivity extends QMUIActivity implements LifecycleProvider<ActivityEvent> {
+public class BaseActivity extends QMUIActivity  {
 
     private static final String KEY_ACTIVITY_ID = "KEY_ACTIVITY_ID";
     /**
@@ -75,56 +65,56 @@ public class BaseActivity extends QMUIActivity implements LifecycleProvider<Acti
 //        return registry;
 //    }
     /*为了使用RxBus start   */
-    private final BehaviorSubject<ActivityEvent> lifecycleSubject = BehaviorSubject.create();
-
-    @Override
-    @NonNull
-    @CheckResult
-    public final Observable<ActivityEvent> lifecycle() {
-        return lifecycleSubject.hide();
-    }
-
-    @Override
-    @NonNull
-    @CheckResult
-    public final <T> LifecycleTransformer<T> bindUntilEvent(@NonNull ActivityEvent event) {
-        return RxLifecycle.bindUntilEvent(lifecycleSubject, event);
-    }
-
-    @Override
-    @NonNull
-    @CheckResult
-    public final <T> LifecycleTransformer<T> bindToLifecycle() {
-        return RxLifecycleAndroid.bindActivity(lifecycleSubject);
-    }
-
-    @Override
-    @CallSuper
-    protected void onStart() {
-        super.onStart();
-        lifecycleSubject.onNext(ActivityEvent.START);
-    }
-
-    @Override
-    @CallSuper
-    protected void onResume() {
-        super.onResume();
-        lifecycleSubject.onNext(ActivityEvent.RESUME);
-    }
-
-    @Override
-    @CallSuper
-    protected void onPause() {
-        lifecycleSubject.onNext(ActivityEvent.PAUSE);
-        super.onPause();
-    }
-
-    @Override
-    @CallSuper
-    protected void onStop() {
-        lifecycleSubject.onNext(ActivityEvent.STOP);
-        super.onStop();
-    }
+//    private final BehaviorSubject<ActivityEvent> lifecycleSubject = BehaviorSubject.create();
+//
+//    @Override
+//    @NonNull
+//    @CheckResult
+//    public final Observable<ActivityEvent> lifecycle() {
+//        return lifecycleSubject.hide();
+//    }
+//
+//    @Override
+//    @NonNull
+//    @CheckResult
+//    public final <T> LifecycleTransformer<T> bindUntilEvent(@NonNull ActivityEvent event) {
+//        return RxLifecycle.bindUntilEvent(lifecycleSubject, event);
+//    }
+//
+//    @Override
+//    @NonNull
+//    @CheckResult
+//    public final <T> LifecycleTransformer<T> bindToLifecycle() {
+//        return RxLifecycleAndroid.bindActivity(lifecycleSubject);
+//    }
+//
+//    @Override
+//    @CallSuper
+//    protected void onStart() {
+//        super.onStart();
+//        lifecycleSubject.onNext(ActivityEvent.START);
+//    }
+//
+//    @Override
+//    @CallSuper
+//    protected void onResume() {
+//        super.onResume();
+//        lifecycleSubject.onNext(ActivityEvent.RESUME);
+//    }
+//
+//    @Override
+//    @CallSuper
+//    protected void onPause() {
+//        lifecycleSubject.onNext(ActivityEvent.PAUSE);
+//        super.onPause();
+//    }
+//
+//    @Override
+//    @CallSuper
+//    protected void onStop() {
+//        lifecycleSubject.onNext(ActivityEvent.STOP);
+//        super.onStop();
+//    }
 
     /**
      * isChangingConfigurations()函数在是Api level 11（Android 3.0.x） 中引入的
@@ -132,9 +122,9 @@ public class BaseActivity extends QMUIActivity implements LifecycleProvider<Acti
      * 常见的案例就是 Android设备的屏幕方向发生变化，比如从横屏变为竖屏。
      */
     @Override
-    @CallSuper
+    //@CallSuper
     protected void onDestroy() {
-        lifecycleSubject.onNext(ActivityEvent.DESTROY);
+        //lifecycleSubject.onNext(ActivityEvent.DESTROY);
         //检查此活动是否处于销毁过程中，以便用新配置重新创建。
         if (!isChangingConfigurations()) {
             Timber.tag(getClassName()).i("销毁的configPersistentComponent id=%d", mActivityId);
@@ -146,7 +136,7 @@ public class BaseActivity extends QMUIActivity implements LifecycleProvider<Acti
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        lifecycleSubject.onNext(ActivityEvent.CREATE);
+//        lifecycleSubject.onNext(ActivityEvent.CREATE);
 
         //创建ActivityComponent，如果配置更改后调用缓存的ConfigPersistentComponent，则重用它。
         mActivityId = savedInstanceState != null ? savedInstanceState.getLong(KEY_ACTIVITY_ID) : NEXT_ID.getAndIncrement();

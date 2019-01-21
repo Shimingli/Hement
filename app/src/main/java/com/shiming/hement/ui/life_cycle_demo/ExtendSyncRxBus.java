@@ -35,6 +35,7 @@ public class ExtendSyncRxBus {
     private ExtendSyncRxBus() {
         relay = PublishRelay.create();
     }
+
     public void post(ExtendEvents event) {
         relay.accept(event);
     }
