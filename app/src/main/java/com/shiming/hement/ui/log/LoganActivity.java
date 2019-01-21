@@ -4,8 +4,12 @@ package com.shiming.hement.ui.log;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Base64InputStream;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.dianping.logan.Logan;
@@ -44,7 +48,8 @@ import javax.crypto.spec.SecretKeySpec;
  * 日志文件的安全性必须得到保障，不能随意被破解，更不能明文存储。Logan采用了流式加密的方式，使用对称密钥加密日志数据，存储到本地。
  * 同时在日志上传时，使用非对称密钥对对称密钥Key做加密上传，防止密钥Key被破解，从而在网络层保证日志安全。
  * </p>
- *
+ *  https://blog.csdn.net/u013762572/article/details/83118534  参考的博客
+ *  How to use demo ？   请查看官方的Demo ：  https://github.com/Meituan-Dianping/Logan/wiki/How-to-use-demo
  * @author shiming
  * @version v1.0
  * @since 2019/1/15 10:24
@@ -53,36 +58,43 @@ import javax.crypto.spec.SecretKeySpec;
 public class LoganActivity extends BaseActivity {
 
     private static final String TAG = "LoganActivity";
-    private RealSendLogRunnable mSendLogRunnable;
     private TextView mTvInfo;
+    private com.shiming.hement.ui.log.RealSendLogRunnable mRealSendLogRunnable;
+    private Button mSendBtn;
+    private EditText mEditIp;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_logan_layout);
         mTvInfo = findViewById(R.id.tv_file_des);
+        mSendBtn = (Button) findViewById(R.id.send_btn);
+        mEditIp = (EditText) findViewById(R.id.send_ip);
         System.out.println(TAG + "start------------------------------------");
         Logan.w(TAG, 1);
         Logan.w(TAG, 1);
-        Logan.w("我要好好学习 天天向上", 1);
+        Logan.w("我要好好学习 天天向上——1", 1);
+        Logan.w("我要好好学习 天天向上——2", 2);
+        Logan.w("我要好好学习 天天向上——3", 3);
+        Logan.w("我要好好学习 天天向上——4", 4);
 
         Logan.w(TAG + "test logan", 1);
         Logan.w("test logan", 3);
         Logan.w("test logan", 2);
         Logan.w("test logan", 4);
         Logan.w("test logan", 5);
+        Logan.w("dersdetastedewst   没啥关系啊 感觉是 ", 5);
 
-//
 
 
-//
+
         //其中key为日期，value为日志文件大小（Bytes）。
         Map<String, Long> map = Logan.getAllFilesInfo();
 
         Logger.d(map);
         Logger.d(TAG);
         Logan.f();
-        mSendLogRunnable = new RealSendLogRunnable();
+//        mSendLogRunnable = new RealSendLogRunnable();
         String[] arr = {"2019-01-15"};
         Logan.setDebug(true);
         Logan.setOnLoganProtocolStatus(new OnLoganProtocolStatus() {
@@ -97,9 +109,26 @@ public class LoganActivity extends BaseActivity {
         String d = dataFormat.format(new Date(System.currentTimeMillis()));
         String[] temp = new String[1];
         temp[0] = d;
-        Logan.s(temp, mSendLogRunnable);
-
+        loganSend();
         loganFilesInfo();
+        mRealSendLogRunnable = new com.shiming.hement.ui.log.RealSendLogRunnable();
+        mSendBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loganSend();
+            }
+        });
+    }
+    private void loganSend() {
+        SimpleDateFormat dataFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String d = dataFormat.format(new Date(System.currentTimeMillis()));
+        String[] temp = new String[1];
+        temp[0] = d;
+        String ip = mEditIp.getText().toString().trim();
+        if (!TextUtils.isEmpty(ip)) {
+            mRealSendLogRunnable.setIp(ip);
+        }
+        Logan.s(temp, mRealSendLogRunnable);
     }
 
     private void loganFilesInfo() {
@@ -139,6 +168,7 @@ public class LoganActivity extends BaseActivity {
         @Override
         public void sendLog(File logFile) {
             MoreAES instances = MoreAES.getInstances();
+
 //            AssetManager assets = getAssets();
 //            String s = logFile.getAbsolutePath() + "shiming";
 //            instances.decrypt(logFile.getPath(),logFile.getPath()+"shiming","0123456789012345".getBytes(),"0123456789012345".getBytes());
@@ -195,4 +225,14 @@ public class LoganActivity extends BaseActivity {
             }
         }.start();
     }
+
+    /*
+字段	含义	举例
+c	log-content 日志的内容	long one
+f	flag-key 日志的标记	1
+l	local-time 日志的当地时间	1539611498547
+n	threadname_key 写当前日志的线程名	main/thread-24
+i	threadid_key 写当前日志的线程id	1
+m	ismain_key 是否在主线程中运行	true/false
+     */
 }
