@@ -35,6 +35,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -57,20 +58,37 @@ public class RealSendLogRunnable extends SendLogRunnable {
 
     @Override
     public void sendLog(File logFile) {
+//        try {
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(logFile)));
+//            String temp = null;
+//            while ((temp = reader.readLine()) != null){
+//                String decrypt = AESOperator.getInstance().decrypt(temp);
+//                System.out.println("shiming ==="+decrypt);
+//            }
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(logFile)));
-            String temp = null;
-            while ((temp = reader.readLine()) != null){
-                String decrypt = AESOperator.getInstance().decrypt(temp);
-                System.out.println("shiming ==="+decrypt);
-            }
+            LoganParser loganParser = new LoganParser("shiminglog123456".getBytes(), "shiminglog123456".getBytes());
+            FileInputStream fileInputStream = new FileInputStream(logFile);
+            File copy = new File("copy");
+            boolean newFile = copy.createNewFile();
+            FileOutputStream fileOutputStream = new FileOutputStream(copy);
+            loganParser.parse(fileInputStream,fileOutputStream);
+            fileInputStream.close();
+            fileOutputStream.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } finally {
+
         }
+
 //        boolean success = doSendFileByAction(logFile);
 //        Log.d("上传日志测试", "日志上传测试结果：" + success);
     }
