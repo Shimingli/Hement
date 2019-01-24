@@ -30,17 +30,20 @@ import com.dianping.logan.SendLogRunnable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -54,8 +57,22 @@ public class RealSendLogRunnable extends SendLogRunnable {
 
     @Override
     public void sendLog(File logFile) {
-        boolean success = doSendFileByAction(logFile);
-        Log.d("上传日志测试", "日志上传测试结果：" + success);
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(logFile)));
+            String temp = null;
+            while ((temp = reader.readLine()) != null){
+                String decrypt = AESOperator.getInstance().decrypt(temp);
+                System.out.println("shiming ==="+decrypt);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        boolean success = doSendFileByAction(logFile);
+//        Log.d("上传日志测试", "日志上传测试结果：" + success);
     }
 
     public void setIp(String ip) {
