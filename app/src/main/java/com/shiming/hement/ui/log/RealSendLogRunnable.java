@@ -91,22 +91,7 @@ public class RealSendLogRunnable extends SendLogRunnable {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            try {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-                String temp = null;
-                while ((temp = reader.readLine()) != null) {
-//                    String decrypt = AESOperator.getInstance().decrypt(temp);
-                    System.out.println("shiming ===" + temp);
-                }
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            //到最后把它删除了 是否要删除之类的
-            file.delete();
+
         }
 
     }

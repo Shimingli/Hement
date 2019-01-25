@@ -18,6 +18,7 @@ import com.dianping.logan.SendLogRunnable;
 import com.orhanobut.logger.Logger;
 import com.shiming.hement.R;
 import com.shiming.hement.ui.base.BaseActivity;
+import com.shiming.hement.ui.life_cycle_demo.ExtendSyncRxBus;
 import com.shiming.hement.utils.AndroidAESEncryptor;
 import com.shiming.hement.utils.MoreAES;
 
@@ -120,6 +121,8 @@ public class LoganActivity extends BaseActivity {
                 loganSend();
             }
         });
+//        ExtendSyncRxBus
+//        IronManLog
     }
     private void loganSend() {
         SimpleDateFormat dataFormat = new SimpleDateFormat("yyyy-MM-dd");
