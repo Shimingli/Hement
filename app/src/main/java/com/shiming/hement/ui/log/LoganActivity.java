@@ -37,6 +37,8 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import timber.log.Timber;
+
 /**
  * <p>
  * https://github.com/Meituan-Dianping/Logan
@@ -111,7 +113,7 @@ public class LoganActivity extends BaseActivity {
         temp[0] = d;
         loganSend();
         loganFilesInfo();
-        mRealSendLogRunnable = new com.shiming.hement.ui.log.RealSendLogRunnable();
+        mRealSendLogRunnable = new com.shiming.hement.ui.log.RealSendLogRunnable(this);
         mSendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,6 +130,8 @@ public class LoganActivity extends BaseActivity {
         if (!TextUtils.isEmpty(ip)) {
             mRealSendLogRunnable.setIp(ip);
         }
+        Timber.tag(TAG).w("上传日志的接受日期的 %s",temp);
+//        temp[1]="2019-01-24";
         Logan.s(temp, mRealSendLogRunnable);
     }
 

@@ -20,6 +20,7 @@ import com.shiming.hement.injection.component.DaggerApplicationComponent;
 import com.shiming.hement.injection.module.ApplicationModule;
 import com.shiming.hement.lifecycle.SyncResponseEventType;
 import com.shiming.hement.lifecycle.SyncRxBus;
+import com.shiming.hement.ui.log.FileNameConfig;
 import com.shiming.hement.utils.Events;
 
 import org.jetbrains.annotations.NotNull;
@@ -82,6 +83,8 @@ public class HementApplication extends BaseApplication {
                  .setEncryptIV16("shiminglog123456".getBytes()) //128位aes加密IV
                 .build();
         Logan.init(config);
+
+        FileNameConfig.initFolder();
     }
 
 

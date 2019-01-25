@@ -53,32 +53,37 @@ import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSession;
 
+import timber.log.Timber;
+
+
+import static com.shiming.hement.ui.log.FileNameConfig.HOME_LOG_FOLDER;
+
+/**
+ * 需要权限啊哎哎啊啊 啊啊啊 哎哎   啊啊啊
+ *
+ *
+ */
 public class RealSendLogRunnable extends SendLogRunnable {
+    private static final String TAG = "RealSendLogRunnable";
     private String mUploadLogUrl = "http://localhost:3000/logupload";
+    private final LoganActivity mLoganActivity;
+    File file = null;
+    public RealSendLogRunnable(LoganActivity loganActivity) {
+        mLoganActivity = loganActivity;
+        file = FileUtils.createFile(HOME_LOG_FOLDER);
+    }
 
     @Override
     public void sendLog(File logFile) {
-//        try {
-//            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(logFile)));
-//            String temp = null;
-//            while ((temp = reader.readLine()) != null){
-//                String decrypt = AESOperator.getInstance().decrypt(temp);
-//                System.out.println("shiming ==="+decrypt);
-//            }
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+
         try {
             LoganParser loganParser = new LoganParser("shiminglog123456".getBytes(), "shiminglog123456".getBytes());
             FileInputStream fileInputStream = new FileInputStream(logFile);
-            File copy = new File("copy");
-            boolean newFile = copy.createNewFile();
-            FileOutputStream fileOutputStream = new FileOutputStream(copy);
-            loganParser.parse(fileInputStream,fileOutputStream);
+//             file = makeFilePath(mLoganActivity.getFilesDir().getPath(), "logcpoy.txt");   /data/user/0/com.shiming.hement/fileslogcpoy.txt
+//             file = makeFilePath(HOME_FOLDER, HOME_LOG_FOLDER);
+            Timber.tag(TAG).w("是否创建文件成功 %s", file.toString()); // 是否创建文件成功 /storage/emulated/0/hement/hement.log
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            loganParser.parse(fileInputStream, fileOutputStream);
             fileInputStream.close();
             fileOutputStream.close();
         } catch (FileNotFoundException e) {
@@ -86,11 +91,52 @@ public class RealSendLogRunnable extends SendLogRunnable {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-
+            try {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+                String temp = null;
+                while ((temp = reader.readLine()) != null) {
+//                    String decrypt = AESOperator.getInstance().decrypt(temp);
+                    System.out.println("shiming ===" + temp);
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            //到最后把它删除了 是否要删除之类的
+            file.delete();
         }
 
-//        boolean success = doSendFileByAction(logFile);
-//        Log.d("上传日志测试", "日志上传测试结果：" + success);
+    }
+
+    // 生成文件
+    public File makeFilePath(String filePath, String fileName) {
+        File file = null;
+        makeRootDirectory(filePath);
+        try {
+            file = new File(filePath + fileName);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return file;
+    }
+
+    // 生成文件夹
+    public static void makeRootDirectory(String filePath) {
+        File file = null;
+        try {
+            file = new File(filePath);
+            if (!file.exists()) {
+                file.mkdir();
+            }
+        } catch (Exception e) {
+            Log.i("error:", e + "");
+        }
     }
 
     public void setIp(String ip) {
