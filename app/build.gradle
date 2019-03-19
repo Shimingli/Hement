@@ -65,7 +65,8 @@ dependencies {
     api 'com.dianping.android.sdk:logan:1.1.0'
 
     api 'com.lsm.maven:ironmanlog:1.0.0'
-    api 'com.lsm.maven:rxbuslibrary:1.0.1'
+
+//    api 'com.lsm.maven:rxbuslibrary:1.0.1'
 
      //就是那个生命周期的问题 还是不要用 为好
 //    api 'com.trello.rxlifecycle3:rxlifecycle:3.0.0'

@@ -17,6 +17,7 @@
 package com.shiming.base.widget.touchfixtextview;
 
 import android.support.annotation.ColorInt;
+import android.support.v4.view.ViewCompat;
 import android.text.TextPaint;
 import android.text.style.ClickableSpan;
 import android.view.View;
